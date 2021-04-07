@@ -11,6 +11,7 @@ import { iOVM_L2DepositedToken } from "../../../iOVM/bridge/tokens/iOVM_L2Deposi
 import { OVM_CrossDomainEnabled } from "../../../libraries/bridge/OVM_CrossDomainEnabled.sol";
 import { Lib_AddressResolver } from "../../../libraries/resolver/Lib_AddressResolver.sol";
 
+import "hardhat/console.sol";
 /**
  * @title OVM_L1ETHGateway
  * @dev The L1 ETH Gateway is a contract which stores deposited ETH that is in use on L2.
@@ -70,6 +71,8 @@ contract OVM_L1ETHGateway is iOVM_L1ETHGateway, OVM_CrossDomainEnabled, Lib_Addr
         override
         payable
     {
+        console.log("xxl solc come to deposit");
+        console.log(msg.sender);
         _initiateDeposit(msg.sender, msg.sender);
     }
 
