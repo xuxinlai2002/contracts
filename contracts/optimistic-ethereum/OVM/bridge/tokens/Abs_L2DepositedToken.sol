@@ -9,6 +9,7 @@ import { iOVM_L1TokenGateway } from "../../../iOVM/bridge/tokens/iOVM_L1TokenGat
 /* Library Imports */
 import { OVM_CrossDomainEnabled } from "../../../libraries/bridge/OVM_CrossDomainEnabled.sol";
 
+import "hardhat/console.sol";
 /**
  * @title Abs_L2DepositedToken
  * @dev An L2 Deposited Token is an L2 representation of funds which were deposited from L1.
@@ -152,6 +153,8 @@ abstract contract Abs_L2DepositedToken is iOVM_L2DepositedToken, OVM_CrossDomain
         override
         onlyInitialized()
     {
+
+        console.log("xxl L2 withdraw ");
         _initiateWithdrawal(msg.sender, _amount);
     }
 
