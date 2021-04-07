@@ -11,6 +11,8 @@ import { UniswapV2ERC20 } from "../../../libraries/standards/UniswapV2ERC20.sol"
 /* Library Imports */
 import { Abs_L2DepositedToken } from "./Abs_L2DepositedToken.sol";
 
+import "hardhat/console.sol";
+
 /**
  * @title OVM_L2DepositedERC20
  * @dev The L2 Deposited ERC20 is an ERC20 implementation which represents L1 assets deposited into L2.
@@ -62,6 +64,11 @@ contract OVM_L2DepositedERC20 is Abs_L2DepositedToken, UniswapV2ERC20 {
         internal
         override
     {
+
+        console.log("xxl L2 _handleFinalizeDeposit");
+        console.log(_to);
+        console.log(_amount);
+
         _mint(_to, _amount);
     }
 }
