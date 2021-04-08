@@ -53,6 +53,8 @@ contract OVM_L2DepositedERC20 is Abs_L2DepositedToken, UniswapV2ERC20 {
         internal
         override
     {
+
+        console.log("xxl L2 _handleInitiateWithdrawal");
         _burn(msg.sender, _amount);
     }
 

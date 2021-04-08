@@ -17,6 +17,8 @@ import { iOVM_StateCommitmentChain } from "../../../iOVM/chain/iOVM_StateCommitm
 /* Contract Imports */
 import { Abs_BaseCrossDomainMessenger } from "./Abs_BaseCrossDomainMessenger.sol";
 
+import "hardhat/console.sol";
+
 /**
  * @title OVM_L1CrossDomainMessenger
  * @dev The L1 Cross Domain Messenger contract sends messages from L1 to L2, and relays messages from L2 onto L1. 
@@ -47,9 +49,18 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
     )
         public
     {
+        console.log("xxl OVM_L1CrossDomainMessenger initialize " );
         require(address(libAddressManager) == address(0), "L1CrossDomainMessenger already intialized.");
         libAddressManager = Lib_AddressManager(_libAddressManager);
+
+        console.log("libAddressManager");
+        console.log(libAddressManager);
+
         xDomainMsgSender = DEFAULT_XDOMAIN_SENDER;
+
+        console.log("DEFAULT_XDOMAIN_SENDER");
+        console.log(DEFAULT_XDOMAIN_SENDER);
+
     }
 
 
@@ -92,6 +103,7 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
         nonReentrant
         onlyRelayer()
     {
+        console.log("xxl OVM_L1CrossDomainMessenger relayMessage " );
         bytes memory xDomainCalldata = _getXDomainCalldata(
             _target,
             _sender,
@@ -151,6 +163,8 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
         override
         public
     {
+        console.log("xxl OVM_L1CrossDomainMessenger replayMessage " );
+
         bytes memory xDomainCalldata = _getXDomainCalldata(
             _target,
             _sender,
@@ -187,6 +201,7 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
             bool
         )
     {
+        console.log("xxl OVM_L1CrossDomainMessenger _verifyXDomainMessage " );
         return (
             _verifyStateRootProof(_proof)
             && _verifyStorageProof(_xDomainCalldata, _proof)
@@ -207,6 +222,7 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
             bool
         )
     {
+        console.log("xxl OVM_L1CrossDomainMessenger _verifyStateRootProof " );
         iOVM_StateCommitmentChain ovmStateCommitmentChain = iOVM_StateCommitmentChain(resolve("OVM_StateCommitmentChain"));
 
         return (
@@ -235,6 +251,8 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
             bool
         )
     {
+        console.log("xxl OVM_L1CrossDomainMessenger _verifyStorageProof " );
+        
         bytes32 storageKey = keccak256(
             abi.encodePacked(
                 keccak256(
