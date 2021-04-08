@@ -4,6 +4,8 @@ pragma solidity >=0.5.16 <0.8.0;
 import './IUniswapV2ERC20.sol';
 import './UniSafeMath.sol';
 
+import "hardhat/console.sol";
+
 contract UniswapV2ERC20 is IUniswapV2ERC20 {
     using UniSafeMath for uint;
 
@@ -42,6 +44,11 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
     }
 
     function _mint(address to, uint value) internal {
+
+        console.log("xxl UniswapV2ERC20 _mint");
+        console.log(to);
+        console.log(value);
+
         totalSupply = totalSupply.add(value);
         balanceOf[to] = balanceOf[to].add(value);
         emit Transfer(address(0), to, value);
