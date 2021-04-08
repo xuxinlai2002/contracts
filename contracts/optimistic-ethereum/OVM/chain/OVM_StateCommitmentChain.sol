@@ -17,6 +17,8 @@ import { iOVM_ChainStorageContainer } from "../../iOVM/chain/iOVM_ChainStorageCo
 /* External Imports */
 import '@openzeppelin/contracts/math/SafeMath.sol';
 
+import "hardhat/console.sol";
+
 /**
  * @title OVM_StateCommitmentChain
  * @dev The State Commitment Chain (SCC) contract contains a list of proposed state roots which
@@ -208,6 +210,8 @@ contract OVM_StateCommitmentChain is iOVM_StateCommitmentChain, Lib_AddressResol
             "Invalid batch header."
         );
 
+        console.log("xxl L1 verifyStateCommitment Lib_MerkleTree.verify");
+
         require(
             Lib_MerkleTree.verify(
                 _batchHeader.batchRoot,
@@ -235,6 +239,7 @@ contract OVM_StateCommitmentChain is iOVM_StateCommitmentChain, Lib_AddressResol
             bool _inside
         )
     {
+        console.log("xxl L1 insideFraudProofWindow");
         (uint256 timestamp,) = abi.decode(
             _batchHeader.extraData,
             (uint256, address)
@@ -244,6 +249,8 @@ contract OVM_StateCommitmentChain is iOVM_StateCommitmentChain, Lib_AddressResol
             timestamp != 0,
             "Batch header timestamp cannot be zero"
         );
+
+        console.log("xxl L1 FRAUD_PROOF_WINDOW %d" ,FRAUD_PROOF_WINDOW);
         return SafeMath.add(timestamp, FRAUD_PROOF_WINDOW) > block.timestamp;
     }
 

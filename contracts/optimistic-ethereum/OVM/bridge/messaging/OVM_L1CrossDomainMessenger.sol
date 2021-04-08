@@ -103,13 +103,47 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
         nonReentrant
         onlyRelayer()
     {
-        console.log("xxl OVM_L1CrossDomainMessenger relayMessage " );
+        console.log("xxl L1 OVM_L1CrossDomainMessenger relayMessage " );
+
+        console.log("xxl L1 _getXDomainCalldata _target =%s,_sender=%s,_messageNonce=%d",_target,_sender,_messageNonce);
+        console.logBytes("_message");
+        console.logBytes(_message);
+
         bytes memory xDomainCalldata = _getXDomainCalldata(
             _target,
             _sender,
             _message,
             _messageNonce
         );
+
+        console.logBytes("xxl L1 xDomainCalldata");
+        console.logBytes(xDomainCalldata);
+
+        console.log("xxl L1 L2MessageInclusionProof ");
+
+        console.log("xxl L1 L2MessageInclusionProof stateRoot");
+        console.logBytes32(_proof.stateRoot);
+
+        console.log("xxl L1 L2MessageInclusionProof ChainBatchHeader batchIndex=%d",_proof.stateRootBatchHeader.batchIndex);
+        console.log("xxl L1 L2MessageInclusionProof ChainBatchHeader batchRoot");
+        console.logBytes32(_proof.stateRootBatchHeader.batchRoot);
+        console.log("xxl L1 L2MessageInclusionProof ChainBatchHeader batchSize=%d",_proof.stateRootBatchHeader.batchSize);
+        console.log("xxl L1 L2MessageInclusionProof ChainBatchHeader prevTotalElements=%d",_proof.stateRootBatchHeader.prevTotalElements);
+        console.log("xxl L1 L2MessageInclusionProof ChainBatchHeader extraData");
+        console.logBytes(_proof.stateRootBatchHeader.extraData);
+
+        console.log("xxl L1 L2MessageInclusionProof ChainInclusionProof index=%d",_proof.stateRootProof.index);
+        uint sSzie = _proof.stateRootProof.siblings.length;
+        console.log("xxl L1 L2MessageInclusionProof ChainInclusionProof siblings total=%d",sSzie);
+        for (uint i = 0; i < sSzie; ++i){
+            console.log("xxl L1 L2MessageInclusionProof ChainInclusionProof siblings i=%d",i);
+            console.logBytes32(_proof.stateRootProof.siblings[i]);
+        }
+        
+        console.log("xxl L1 L2MessageInclusionProof stateTrieWitness");
+        console.logBytes(_proof.stateTrieWitness);
+        console.log("xxl L1 L2MessageInclusionProof storageTrieWitness");
+        console.logBytes(_proof.storageTrieWitness);
 
         require(
             _verifyXDomainMessage(
@@ -125,7 +159,7 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
             successfulMessages[xDomainCalldataHash] == false,
             "Provided message has already been received."
         );
-
+        
         xDomainMsgSender = _sender;
         (bool success, ) = _target.call(_message);
         xDomainMsgSender = DEFAULT_XDOMAIN_SENDER;

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >0.5.0 <0.8.0;
 
+import "hardhat/console.sol";
 /**
  * @title Lib_MerkleTree
  * @author River Keefer
@@ -145,6 +146,22 @@ library Lib_MerkleTree {
             _siblings.length == _ceilLog2(_totalLeaves),
             "Lib_MerkleTree: Total siblings does not correctly correspond to total leaves."
         );
+
+
+        //xxl L1 merke verify
+        // console.log("xxl L1 The Merkle root to verify against");
+        // console.logBytes32(_root);
+        // console.log("The leaf hash to verify inclusion of.");
+        // console.logBytes32(_leaf); 
+        // console.log("The index in the tree of this leaf. %d",_index);
+        // console.log("The total number of leaves originally passed into. %d",_totalLeaves);
+        
+        // uint sSzie = _siblings.length;
+        // console.log("xxl Array of sibline nodes in the inclusion proof total=%d",sSzie);
+        // for (uint i = 0; i < sSzie; ++i){
+        //     console.log("each siblings i=%d",i);
+        //     console.logBytes32(_siblings[i]);
+        // }
 
         bytes32 computedRoot = _leaf;
 
