@@ -53,8 +53,8 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
         require(address(libAddressManager) == address(0), "L1CrossDomainMessenger already intialized.");
         libAddressManager = Lib_AddressManager(_libAddressManager);
 
-        console.log("libAddressManager");
-        console.log(libAddressManager);
+        // console.log("libAddressManager");
+        // console.log(libAddressManager);
 
         xDomainMsgSender = DEFAULT_XDOMAIN_SENDER;
 
@@ -252,7 +252,7 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
         )
     {
         console.log("xxl OVM_L1CrossDomainMessenger _verifyStorageProof " );
-        
+
         bytes32 storageKey = keccak256(
             abi.encodePacked(
                 keccak256(
