@@ -110,12 +110,18 @@ contract OVM_L1ETHGateway is iOVM_L1ETHGateway, OVM_CrossDomainEnabled, Lib_Addr
                 msg.value
             );
 
+        console.log("xxl L1 _initiateDeposit data");
+        console.logBytes(data);
+
         // Send calldata into L2
         sendCrossDomainMessage(
             ovmEth,
             data,
             getFinalizeDepositL2Gas
         );
+
+        console.log("xxl L1 _initiateDeposit ovmEth");
+        console.log(ovmEth);
 
         emit DepositInitiated(_from, _to, msg.value);
     }
