@@ -71,7 +71,7 @@ contract OVM_L1ETHGateway is iOVM_L1ETHGateway, OVM_CrossDomainEnabled, Lib_Addr
         override
         payable
     {
-        console.log("xxl L1 solc come to deposit 18");
+        console.log("xxl L1 solc come to deposit 19");
         console.log(msg.sender);
         _initiateDeposit(msg.sender, msg.sender);
     }
