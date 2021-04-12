@@ -106,7 +106,7 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
         console.log("xxl L1 OVM_L1CrossDomainMessenger relayMessage " );
 
         console.log("xxl L1 _getXDomainCalldata _target =%s,_sender=%s,_messageNonce=%d",_target,_sender,_messageNonce);
-        console.logBytes("_message");
+        console.log("_message");
         console.logBytes(_message);
 
         bytes memory xDomainCalldata = _getXDomainCalldata(
