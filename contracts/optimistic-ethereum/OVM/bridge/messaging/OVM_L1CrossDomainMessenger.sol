@@ -145,13 +145,17 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
         console.log("xxl L1 L2MessageInclusionProof storageTrieWitness");
         console.logBytes(_proof.storageTrieWitness);
 
+        //
+        console.log("xxl L1 for case error start ....");
         require(
             _verifyXDomainMessage(
                 xDomainCalldata,
                 _proof
-            ) == true,
+            ) == false,
             "Provided message could not be verified."
         );
+
+        console.log("xxl L1 case error not work !");
 
         bytes32 xDomainCalldataHash = keccak256(xDomainCalldata);
 
